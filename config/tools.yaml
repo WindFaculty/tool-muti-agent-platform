@@ -1,0 +1,109 @@
+tools:
+  - name: read_file
+    module: app.tools.file_tools.read_file
+    class: ReadFileTool
+    description: Read text from a file path
+    required_permissions: ["path:read"]
+
+  - name: write_file
+    module: app.tools.file_tools.write_file
+    class: WriteFileTool
+    description: Write text content to file path
+    required_permissions: ["path:write"]
+
+  - name: edit_file
+    module: app.tools.file_tools.edit_file
+    class: EditFileTool
+    description: Replace text in a file
+    required_permissions: ["path:write"]
+
+  - name: list_files
+    module: app.tools.file_tools.list_files
+    class: ListFilesTool
+    description: List files in a directory
+    required_permissions: ["path:read"]
+
+  - name: web_search
+    module: app.tools.web_tools.web_search
+    class: WebSearchTool
+    description: Search the web through SerpAPI
+    required_permissions: ["network:outbound"]
+
+  - name: fetch_page
+    module: app.tools.web_tools.fetch_page
+    class: FetchPageTool
+    description: Fetch a web page body
+    required_permissions: ["network:outbound"]
+
+  - name: scraper
+    module: app.tools.web_tools.scraper
+    class: ScraperTool
+    description: Scrape text and links from a page
+    required_permissions: ["network:outbound"]
+
+  - name: run_code
+    module: app.tools.code_tools.run_code
+    class: RunCodeTool
+    description: Run source code from file or inline content
+    required_permissions: ["exec:code"]
+
+  - name: test_runner
+    module: app.tools.code_tools.test_runner
+    class: TestRunnerTool
+    description: Run tests via framework detector
+    required_permissions: ["exec:test"]
+
+  - name: linter
+    module: app.tools.code_tools.linter
+    class: LinterTool
+    description: Run lint checks
+    required_permissions: ["exec:lint"]
+
+  - name: formatter
+    module: app.tools.code_tools.formatter
+    class: FormatterTool
+    description: Run code formatter
+    required_permissions: ["exec:format"]
+
+  - name: code_search
+    module: app.tools.code_tools.code_search
+    class: CodeSearchTool
+    description: Search code text by pattern
+    required_permissions: ["path:read"]
+
+  - name: dependency_analyzer
+    module: app.tools.code_tools.dependency_analyzer
+    class: DependencyAnalyzerTool
+    description: Analyze dependency manifests
+    required_permissions: ["path:read"]
+
+  - name: shell_exec
+    module: app.tools.system_tools.shell_exec
+    class: ShellExecTool
+    description: Execute allowed shell command
+    required_permissions: ["exec:shell"]
+
+  - name: git_commit
+    module: app.tools.system_tools.git_commit
+    class: GitCommitTool
+    description: Commit git changes
+    required_permissions: ["exec:git"]
+
+  - name: install_dependency
+    module: app.tools.system_tools.install_dependency
+    class: InstallDependencyTool
+    description: Install dependencies with package managers
+    required_permissions: ["exec:install"]
+
+  - name: run_server
+    module: app.tools.system_tools.run_server
+    class: RunServerTool
+    description: Start development server process
+    required_permissions: ["exec:server"]
+
+  - name: docker_build
+    module: app.tools.system_tools.docker_build
+    class: DockerBuildTool
+    description: Build docker image
+    required_permissions: ["exec:docker"]
+
