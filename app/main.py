@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+from app.api.devos import router as devos_router
 from app.api.mcp import router as mcp_router
 from app.api.rest import router as rest_router
 from app.core.config import get_settings
@@ -27,6 +28,7 @@ app = FastAPI(
 )
 app.include_router(rest_router)
 app.include_router(mcp_router)
+app.include_router(devos_router)
 
 
 @app.exception_handler(ToolingError)
@@ -43,4 +45,3 @@ async def unhandled_error_handler(_: Request, exc: Exception) -> JSONResponse:
         status_code=500,
         content={"error": {"code": "INTERNAL_ERROR", "message": str(exc)}},
     )
-

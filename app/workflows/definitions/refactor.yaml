@@ -1,0 +1,95 @@
+workflow_id: refactor
+version: "1.0"
+description: Restructure code while preserving behavior.
+steps:
+  - id: planner
+    agent: planner
+    input_template: |
+      Define the refactor scope, invariants, and safety checks.
+    allowed_tools: []
+    retry_limit: 1
+    on_success: architect
+    on_failure: failed
+    artifacts_to_capture:
+      - plan
+  - id: architect
+    agent: architect
+    input_template: |
+      Describe target module boundaries and compatibility constraints.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - list_files
+      - code_search
+    retry_limit: 1
+    on_success: coder
+    on_failure: failed
+    artifacts_to_capture:
+      - architecture
+  - id: coder
+    agent: coder
+    input_template: |
+      Prepare the refactor implementation notes and workspace outputs.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - write_file
+      - file_writer
+      - edit_file
+      - file_editor
+      - list_files
+      - code_search
+    retry_limit: 1
+    on_success: tester
+    on_failure: failed
+    artifacts_to_capture:
+      - implementation
+  - id: tester
+    agent: tester
+    input_template: |
+      Validate that the refactor preserved behavior.
+    allowed_tools:
+      - test_runner
+      - shell_exec
+      - terminal_runner
+      - read_file
+      - file_reader
+    retry_limit: 1
+    on_success: reviewer
+    on_failure: debugger
+    artifacts_to_capture:
+      - test-report
+  - id: debugger
+    agent: debugger
+    input_template: |
+      Correct regressions introduced by the refactor.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - edit_file
+      - file_editor
+      - write_file
+      - file_writer
+      - test_runner
+      - shell_exec
+      - terminal_runner
+    retry_limit: 2
+    on_success: tester
+    on_failure: failed
+    artifacts_to_capture:
+      - debug-notes
+  - id: reviewer
+    agent: reviewer
+    input_template: |
+      Review the refactor for design quality and compatibility.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - list_files
+      - code_search
+      - test_runner
+    retry_limit: 1
+    on_success: completed
+    on_failure: coder
+    artifacts_to_capture:
+      - review

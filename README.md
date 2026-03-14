@@ -1,133 +1,28 @@
-# Agent Tooling Platform (V1)
+# Agent Platform
 
-Python-based tooling platform for multi-agent coding workflows (Codex, Claude, Gemini) with:
+Optional operator and automation layer for the local desktop assistant project.
 
-- REST API (`/v1/*`)
-- MCP-compatible JSON-RPC endpoint (`/mcp`)
-- Tool registry + metadata
-- Allowlist-based security checks
-- Sandbox execution (Windows-focused)
-- SQLite execution/audit persistence
-- JSONL audit log
+## Role in the new project
+- `agent-platform` is not part of the MVP runtime critical path.
+- The assistant should run with the Unity client, the assistant local backend, SQLite, and local AI runtimes only.
+- This subproject may later host:
+  - scripted QA flows
+  - operator tooling
+  - assistant-specific tool wrappers
+  - dataset and prompt fixture helpers
 
-## Implemented Tool Set (18)
+## Current repo status
+- The folder still contains an existing Python tool platform and some legacy integration assumptions from the previous project direction.
+- Those modules are not the source of truth for task data, planning logic, speech orchestration, or avatar behavior in the new assistant product.
+- The active product architecture is documented in the root `docs/` folder.
 
-1. `read_file`
-2. `write_file`
-3. `edit_file`
-4. `list_files`
-5. `web_search`
-6. `fetch_page`
-7. `scraper`
-8. `run_code`
-9. `test_runner`
-10. `linter`
-11. `formatter`
-12. `code_search`
-13. `dependency_analyzer`
-14. `shell_exec`
-15. `git_commit`
-16. `install_dependency`
-17. `run_server`
-18. `docker_build`
+## Non-goals for this subproject
+- Replacing the assistant local backend
+- Owning the primary task database
+- Embedding Unity avatar or UI logic
+- Becoming a hidden dependency for offline startup
 
-## Project Layout
-
-```text
-agent-platform/
-  app/
-    api/
-    core/
-    registry/
-    tools/
-    storage/
-    logging/
-  config/
-    tools.yaml
-    policies.yaml
-  tests/
-```
-
-## Setup
-
-```powershell
-cd d:\Spring_2026\PRJ301\agent-platform
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-## Environment Variables
-
-```powershell
-$env:AGENT_PLATFORM_SERVICE_TOKENS_CSV="dev-token"
-$env:AGENT_PLATFORM_WORKSPACE_ROOT="d:\Spring_2026\PRJ301"
-$env:AGENT_PLATFORM_SERPAPI_API_KEY="<your_serpapi_key>"
-```
-
-Optional overrides:
-
-- `AGENT_PLATFORM_DATABASE_PATH`
-- `AGENT_PLATFORM_AUDIT_LOG_PATH`
-- `AGENT_PLATFORM_POLICY_CONFIG_PATH`
-- `AGENT_PLATFORM_TOOL_CONFIG_PATH`
-- `AGENT_PLATFORM_REQUESTS_PER_MINUTE`
-- `AGENT_PLATFORM_MAX_CONCURRENT_PER_AGENT`
-
-## Run Service
-
-```powershell
-uvicorn app.main:app --host 0.0.0.0 --port 8088 --reload
-```
-
-## API
-
-Headers required for protected endpoints:
-
-- `X-Service-Token`
-- `X-Agent-Id`
-- `X-Request-Id` (UUID)
-
-### `GET /v1/tools`
-
-List available tools and input schemas.
-
-### `POST /v1/tools/execute`
-
-```json
-{
-  "tool_name": "read_file",
-  "input": { "path": "agent-platform/config/tools.yaml" },
-  "request_id": "optional-uuid-must-match-header",
-  "dry_run": false
-}
-```
-
-### `GET /v1/executions/{execution_id}`
-
-Get persisted execution details.
-
-### `GET /v1/health`
-
-Service + DB + audit health status.
-
-### `POST /mcp`
-
-JSON-RPC methods:
-
-- `tools/list`
-- `tools/call`
-
-## Testing
-
-```powershell
-pytest
-```
-
-## QA
-
-```powershell
-flake8
-isort --check-only .
-```
-
+## Local documentation
+- `docs/coding_rules.md`
+- `docs/image3d_integration.md`
+- `datasets/README.md`

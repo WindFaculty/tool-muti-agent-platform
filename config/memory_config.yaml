@@ -1,0 +1,7 @@
+embeddings:
+  enabled: true
+  max_documents: 8
+retrieval:
+  knowledge_limit: 4
+  memory_limit: 4
+  lexical_window_chars: 2000

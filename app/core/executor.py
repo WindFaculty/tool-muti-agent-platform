@@ -3,12 +3,14 @@ from __future__ import annotations
 import time
 import uuid
 from datetime import datetime, timezone
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from app.core.auth import AuthContext
-from app.core.container import ServiceContainer
 from app.core.errors import PermissionDeniedError, ValidationError
 from app.registry.base_tool import ToolContext, ToolResult
+
+if TYPE_CHECKING:
+    from app.core.container import ServiceContainer
 
 
 def execute_tool(

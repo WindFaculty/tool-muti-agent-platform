@@ -5,11 +5,21 @@ from fastapi.testclient import TestClient
 from tests.conftest import auth_headers
 
 
-def test_list_tools_returns_18(client: TestClient) -> None:
+def test_list_tools_returns_expected_catalog(client: TestClient) -> None:
     response = client.get("/v1/tools", headers=auth_headers())
     assert response.status_code == 200
     payload = response.json()
-    assert len(payload["tools"]) == 18
+    tool_names = {tool["name"] for tool in payload["tools"]}
+    assert len(tool_names) >= 27
+    assert {
+        "read_file",
+        "git_push",
+        "terminal_runner",
+        "docker_runner",
+        "submit_multiview_reconstruction",
+        "get_reconstruction_status",
+        "cancel_reconstruction",
+    }.issubset(tool_names)
 
 
 def test_execute_and_get_execution(client: TestClient) -> None:
@@ -47,4 +57,3 @@ def test_health(client: TestClient) -> None:
     assert payload["status"] == "ok"
     assert payload["db"] is True
     assert payload["audit_log"] is True
-

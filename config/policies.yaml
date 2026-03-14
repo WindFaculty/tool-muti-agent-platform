@@ -16,8 +16,9 @@ agents:
       - "*"
     deny_tools: []
     path_roots:
-      - "d:\\Spring_2026\\PRJ301"
-      - "d:\\Spring_2026\\PRJ301\\agent-platform\\tmp"
+      - "."
+      - "output"
+      - "agent-platform\\tmp"
     network_allowlist:
       - "serpapi.com"
       - "www.google.com"
@@ -82,4 +83,3 @@ agents:
         - "npm"
       docker_build:
         - "docker"
-

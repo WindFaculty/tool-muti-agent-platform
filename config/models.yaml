@@ -1,0 +1,11 @@
+default_provider: lmstudio
+providers:
+  lmstudio:
+    base_url: http://127.0.0.1:1234/v1
+    chat_model: local-model
+    embedding_model: text-embedding
+    timeout_sec: 60
+  mock:
+    chat_model: mock-model
+    embedding_model: mock-embedding
+    timeout_sec: 5

@@ -1,0 +1,69 @@
+workflow_id: reconstruct-3d
+version: "1.0"
+description: Submit and monitor a multi-view image to 3D reconstruction job.
+steps:
+  - id: planner
+    agent: planner
+    input_template: |
+      Confirm the capture set and reconstruction goal, then prepare a concise execution plan.
+    allowed_tools: []
+    retry_limit: 1
+    on_success: architect
+    on_failure: failed
+    artifacts_to_capture:
+      - plan
+  - id: architect
+    agent: architect
+    input_template: |
+      Validate the requested reconstruction parameters and expected output artifacts.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - list_files
+      - code_search
+    retry_limit: 1
+    on_success: submitter
+    on_failure: failed
+    artifacts_to_capture:
+      - capture-spec
+  - id: submitter
+    agent: coder
+    input_template: |
+      Submit the multi-view reconstruction job through the Image3D service and record the returned job id.
+    allowed_tools:
+      - submit_multiview_reconstruction
+      - read_file
+      - file_reader
+      - list_files
+    retry_limit: 1
+    on_success: monitor
+    on_failure: failed
+    artifacts_to_capture:
+      - submission
+  - id: monitor
+    agent: tester
+    input_template: |
+      Poll the Image3D service until the reconstruction completes or fails, then capture artifacts and metrics.
+    allowed_tools:
+      - get_reconstruction_status
+      - cancel_reconstruction
+      - read_file
+      - file_reader
+    retry_limit: 3
+    on_success: reviewer
+    on_failure: failed
+    artifacts_to_capture:
+      - reconstruction-report
+  - id: reviewer
+    agent: reviewer
+    input_template: |
+      Review the completed reconstruction, summarize artifact paths, and call out any quality warnings.
+    allowed_tools:
+      - get_reconstruction_status
+      - read_file
+      - file_reader
+    retry_limit: 1
+    on_success: completed
+    on_failure: failed
+    artifacts_to_capture:
+      - review

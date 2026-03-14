@@ -1,0 +1,81 @@
+workflow_id: bug-fix
+version: "1.0"
+description: Fix a defect with optional architecture analysis.
+steps:
+  - id: planner
+    agent: planner
+    input_template: |
+      Analyze the bug report and produce a concise repair plan.
+    allowed_tools: []
+    retry_limit: 1
+    on_success: coder
+    on_failure: failed
+    artifacts_to_capture:
+      - plan
+  - id: coder
+    agent: coder
+    input_template: |
+      Implement the bug fix or prepare workspace changes.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - write_file
+      - file_writer
+      - edit_file
+      - file_editor
+      - list_files
+      - code_search
+    retry_limit: 1
+    on_success: tester
+    on_failure: failed
+    artifacts_to_capture:
+      - implementation
+  - id: tester
+    agent: tester
+    input_template: |
+      Validate the fix and capture relevant failures if any remain.
+    allowed_tools:
+      - test_runner
+      - shell_exec
+      - terminal_runner
+      - read_file
+      - file_reader
+    retry_limit: 1
+    on_success: reviewer
+    on_failure: debugger
+    artifacts_to_capture:
+      - test-report
+  - id: debugger
+    agent: debugger
+    input_template: |
+      Repair the remaining failures for the bug fix.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - edit_file
+      - file_editor
+      - write_file
+      - file_writer
+      - test_runner
+      - shell_exec
+      - terminal_runner
+    retry_limit: 2
+    on_success: tester
+    on_failure: failed
+    artifacts_to_capture:
+      - debug-notes
+  - id: reviewer
+    agent: reviewer
+    input_template: |
+      Review the fix for correctness, scope control, and regressions.
+    allowed_tools:
+      - read_file
+      - file_reader
+      - list_files
+      - code_search
+      - test_runner
+    retry_limit: 1
+    on_success: completed
+    on_failure: coder
+    artifacts_to_capture:
+      - review

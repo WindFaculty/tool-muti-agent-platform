@@ -70,6 +70,20 @@ def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> TestClient:
     monkeypatch.setenv("AGENT_PLATFORM_AUDIT_LOG_PATH", str(tmp_path / "tool_usage.jsonl"))
     monkeypatch.setenv("AGENT_PLATFORM_TOOL_CONFIG_PATH", str(project_root / "config" / "tools.yaml"))
     monkeypatch.setenv("AGENT_PLATFORM_POLICY_CONFIG_PATH", str(policy_path))
+    monkeypatch.setenv("AGENT_PLATFORM_MODEL_CONFIG_PATH", str(project_root / "config" / "models.yaml"))
+    monkeypatch.setenv("AGENT_PLATFORM_AGENT_CONFIG_PATH", str(project_root / "config" / "agent_config.yaml"))
+    monkeypatch.setenv("AGENT_PLATFORM_MEMORY_CONFIG_PATH", str(project_root / "config" / "memory_config.yaml"))
+    monkeypatch.setenv("AGENT_PLATFORM_PROJECTS_ROOT", str(tmp_path / "projects"))
+    monkeypatch.setenv("AGENT_PLATFORM_DATASETS_ROOT", str(tmp_path / "datasets"))
+    monkeypatch.setenv("AGENT_PLATFORM_DOCS_ROOT", str(project_root / "docs"))
+    monkeypatch.setenv("AGENT_PLATFORM_SCRIPTS_ROOT", str(project_root / "scripts"))
+    monkeypatch.setenv(
+        "AGENT_PLATFORM_WORKFLOWS_ROOT",
+        str(project_root / "app" / "workflows" / "definitions"),
+    )
+    monkeypatch.setenv("AGENT_PLATFORM_PROMPTS_ROOT", str(project_root / "app" / "prompts"))
+    monkeypatch.setenv("AGENT_PLATFORM_PLUGINS_ROOT", str(tmp_path / "plugins"))
+    monkeypatch.setenv("AGENT_PLATFORM_LLM_PROVIDER", "mock")
 
     get_settings.cache_clear()
     with TestClient(app) as test_client:
@@ -83,4 +97,3 @@ def auth_headers(agent_id: str = "codex") -> dict[str, str]:
         "X-Agent-Id": agent_id,
         "X-Request-Id": str(uuid.uuid4()),
     }
-

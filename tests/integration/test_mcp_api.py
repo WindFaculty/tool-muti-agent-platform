@@ -14,7 +14,9 @@ def test_mcp_tools_list(client: TestClient) -> None:
     assert response.status_code == 200
     payload = response.json()
     assert "result" in payload
-    assert len(payload["result"]["tools"]) == 18
+    tool_names = {tool["name"] for tool in payload["result"]["tools"]}
+    assert len(tool_names) >= 27
+    assert "submit_multiview_reconstruction" in tool_names
 
 
 def test_mcp_tools_call_dry_run(client: TestClient) -> None:
@@ -36,4 +38,3 @@ def test_mcp_tools_call_dry_run(client: TestClient) -> None:
     payload = response.json()
     assert payload["result"]["status"] == "dry_run"
     assert payload["result"]["execution_id"] is None
-
