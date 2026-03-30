@@ -1,28 +1,43 @@
-# Agent Platform
+# Tool Multi Agent Platform
 
-Optional operator and automation layer for the local desktop assistant project.
+Extracted AI-focused package from `WindFaculty/app_tro_ly`.
 
-## Role in the new project
-- `agent-platform` is not part of the MVP runtime critical path.
-- The assistant should run with the Unity client, the assistant local backend, SQLite, and local AI runtimes only.
-- This subproject may later host:
-  - scripted QA flows
-  - operator tooling
-  - assistant-specific tool wrappers
-  - dataset and prompt fixture helpers
+This repository intentionally keeps the parts of the source project that are directly related to AI runtime, orchestration, and automation:
 
-## Current repo status
-- The folder still contains an existing Python tool platform and some legacy integration assumptions from the previous project direction.
-- Those modules are not the source of truth for task data, planning logic, speech orchestration, or avatar behavior in the new assistant product.
-- The active product architecture is documented in the root `docs/` folder.
+- `ai/`: prompt, memory, and agent-facing context files
+- `ai-dev-system/`: Windows GUI agent and Unity MCP automation tooling
+- `local-backend/`: FastAPI backend for assistant orchestration, routing, speech adapters, memory, and task-safe AI actions
+- `scripts/`: setup, startup, packaging, and backend smoke helpers
+- `docs/`: runtime and architecture documents relevant to the AI stack
+- `AGENTS.md`: repo-wide machine-facing operating rules copied from the source project
 
-## Non-goals for this subproject
-- Replacing the assistant local backend
-- Owning the primary task database
-- Embedding Unity avatar or UI logic
-- Becoming a hidden dependency for offline startup
+Excluded on purpose:
 
-## Local documentation
-- `docs/coding_rules.md`
-- `docs/image3d_integration.md`
-- `datasets/README.md`
+- `unity-client/`
+- `release/`
+- generated logs, caches, screenshots, databases, and local virtual environments
+- unrelated Blender and asset-production tooling
+
+## Quick Start
+
+### Backend
+
+```powershell
+cd local-backend
+python -m pip install -r requirements.txt
+python run_local.py
+```
+
+### AI Dev System
+
+```powershell
+cd ai-dev-system
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe verify_connection.py
+```
+
+## Notes
+
+- This export preserves folder names from the source repo to reduce churn and keep internal documentation accurate.
+- The packaged scope is centered on AI runtime and automation, not the Unity client shell.

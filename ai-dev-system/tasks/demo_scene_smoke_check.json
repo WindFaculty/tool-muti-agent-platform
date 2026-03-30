@@ -1,0 +1,17 @@
+{
+  "id": "demo_scene_smoke_check",
+  "title": "Smoke check the existing AI demo scene",
+  "prompt": "Load the existing AI demo scene, verify the expected objects are still present, and capture console and screenshot evidence without rebuilding the scene.",
+  "goal": {
+    "id": "scene_smoke_check",
+    "scene_path": "Assets/Scenes/AIDemoBasic3D.unity",
+    "camera": "Main Camera",
+    "expected_objects": [
+      "Main Camera",
+      "Ground",
+      "Player"
+    ],
+    "play_mode": true,
+    "screenshot_file_name": "ai-demo-scene-smoke.png"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "fixture_count": 6,
+  "total_input_tokens": 2699,
+  "average_input_tokens": 449.83,
+  "fixtures": [
+    {
+      "name": "today_summary",
+      "route": "groq_fast",
+      "provider": "groq",
+      "input_tokens": 158,
+      "output_tokens": 24
+    },
+    {
+      "name": "create_task",
+      "route": "groq_fast",
+      "provider": "groq",
+      "input_tokens": 189,
+      "output_tokens": 24
+    },
+    {
+      "name": "reschedule_task",
+      "route": "groq_fast",
+      "provider": "groq",
+      "input_tokens": 183,
+      "output_tokens": 24
+    },
+    {
+      "name": "long_notes_planning",
+      "route": "gemini_deep",
+      "provider": "gemini",
+      "input_tokens": 1282,
+      "output_tokens": 24
+    },
+    {
+      "name": "short_voice_turn",
+      "route": "groq_fast",
+      "provider": "groq",
+      "input_tokens": 189,
+      "output_tokens": 24
+    },
+    {
+      "name": "hybrid_planning_turn",
+      "route": "gemini_deep",
+      "provider": "gemini",
+      "input_tokens": 698,
+      "output_tokens": 24
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+"""App-specific automation profiles."""

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "today_summary",
+    "request": {
+      "message": "Hom nay toi co gi?",
+      "conversation_id": null,
+      "mode": "text",
+      "selected_date": null,
+      "include_voice": false
+    }
+  },
+  {
+    "name": "create_task",
+    "request": {
+      "message": "Them task chuan bi demo luc 9h ngay mai",
+      "conversation_id": null,
+      "mode": "text",
+      "selected_date": null,
+      "include_voice": false
+    }
+  },
+  {
+    "name": "reschedule_task",
+    "prepare_task": {
+      "title": "hop nhom",
+      "status": "planned",
+      "priority": "medium",
+      "scheduled_date": null,
+      "repeat_rule": "none",
+      "tags": []
+    },
+    "request": {
+      "message": "Doi hop nhom sang thu sau luc 14h",
+      "conversation_id": null,
+      "mode": "text",
+      "selected_date": null,
+      "include_voice": false
+    }
+  },
+  {
+    "name": "long_notes_planning",
+    "request": {
+      "message": "Hay toi uu va lap ke hoach cho toi",
+      "conversation_id": null,
+      "mode": "text",
+      "selected_date": null,
+      "include_voice": false,
+      "notes_context": "deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook deadline gap uu tien backend fix websocket viet runbook"
+    }
+  },
+  {
+    "name": "short_voice_turn",
+    "request": {
+      "message": "Nhac toi viec quan trong ngay mai",
+      "conversation_id": null,
+      "mode": "text",
+      "selected_date": null,
+      "include_voice": false,
+      "voice_mode": true
+    }
+  },
+  {
+    "name": "hybrid_planning_turn",
+    "request": {
+      "message": "Phan tich lich va chia viec cho toi trong tuan nay",
+      "conversation_id": null,
+      "mode": "text",
+      "selected_date": null,
+      "include_voice": false
+    }
+  }
+]

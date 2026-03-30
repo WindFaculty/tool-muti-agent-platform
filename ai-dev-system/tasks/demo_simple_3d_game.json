@@ -1,0 +1,13 @@
+{
+  "id": "demo_basic_3d_game",
+  "title": "Create a simple 3D starter scene",
+  "prompt": "Create a simple 3D game with a cube player, WASD movement, a follow camera, a ground plane, and basic physics.",
+  "goal": {
+    "id": "basic_3d_game",
+    "player": "cube",
+    "movement": "wasd",
+    "camera": "follow",
+    "ground": "plane",
+    "physics": true
+  }
+}

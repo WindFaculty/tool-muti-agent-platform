@@ -1,0 +1,7 @@
+- No guessing.
+- One task at a time.
+- Read only relevant files.
+- Prefer summary over raw code.
+- Verify with tests, logs, or outputs.
+- Stop on unclear data or broken encoding.
+- Do not overwrite unknown changes.

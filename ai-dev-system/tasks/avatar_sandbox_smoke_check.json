@@ -1,0 +1,20 @@
+{
+  "id": "avatar_sandbox_smoke_check",
+  "title": "Smoke check the avatar sandbox scene",
+  "prompt": "Load the avatar sandbox scene, verify the expected anchor points and presentation objects are still present, and capture console and screenshot evidence for the avatar prototype environment.",
+  "goal": {
+    "id": "scene_smoke_check",
+    "scene_path": "Assets/AvatarSystem/AvatarProduction/Scenes/AvatarSandbox.unity",
+    "camera": "Main Camera",
+    "expected_objects": [
+      "Main Camera",
+      "Ground",
+      "AvatarAnchorPoints",
+      "IdlePoint",
+      "TalkPoint",
+      "ListenPoint"
+    ],
+    "play_mode": true,
+    "screenshot_file_name": "avatar-sandbox-smoke.png"
+  }
+}
